@@ -1,0 +1,17 @@
+{
+  "name": "twittervuedev",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {},
+  "keywords": [
+    "vue",
+    "dev",
+    "twitter"
+  ],
+  "author": "Daniel Elkington",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^1.18.10",
+    "typescript": "^3.3.3"
+  }
+}

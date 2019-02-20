@@ -2,6 +2,10 @@
   "name": "twittervuedev",
   "version": "1.0.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielelkington/twitter-vue-dev.git"
+  },
   "scripts": {},
   "keywords": [
     "vue",
@@ -12,6 +16,10 @@
   "license": "MIT",
   "dependencies": {
     "nodemon": "^1.18.10",
-    "typescript": "^3.3.3"
+    "typescript": "^3.3.3",
+    "x-ray": "^2.3.3"
+  },
+  "devDependencies": {
+    "@types/x-ray": "^2.3.2"
   }
 }

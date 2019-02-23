@@ -1,18 +1,35 @@
 const Xray = require('x-ray')
-import {Article} from './Article'
+import { Article } from './Article'
 export const index = async (context: any, req: any) => {
   // Thanks to Sarthak Sharma, particularly https://github.com/sarthology/devtocli/blob/master/src/util/crawler.js
   // for assistance with web scraping!
   const xray = Xray()
-  const objects = await xray('https://dev.to/t/vue/latest', '#substories .single-article', [{
-    title: '.index-article-link .content h3',
-    author: 'h4 a',
-    link: '.index-article-link@href',
-    tags: ['.tags .tag'] // need the tags so we can strip them out of the title
-  }])
-  const articles = objects.filter((x:any) => x.title && x.author && x.link).map((x: any) => new Article(x.title, x.author, x.link, x.tags))
-  // TODO get Twitter profile (parse URL to get username)
+  const articleScrapeData = await xray(
+    `https://dev.to/t/${process.env.dev_tag}/latest`,
+    '#substories .single-article',
+    [
+      {
+        title: '.index-article-link .content h3',
+        author: 'h4 a',
+        link: '.index-article-link@href',
+        tags: ['.tags .tag'], // need the tags so we can strip them out of the title
+        authorLink: '.small-pic-link-wrapper@href'
+      }
+    ]
+  )
+  const articles: Article[] = articleScrapeData
+    .filter((x: any) => x.title && x.author && x.link)
+    .map(
+      (x: any) => new Article(x.title, x.author, x.link, x.tags, x.authorLink)
+    )
+  // Scrape author Twitter handles
+  for (let article of articles) {
+    const socialLinks: string[] = await xray(article.authorLink, [
+      '.profile-details .social a@href'
+    ])
+    article.setTwitterHandleFromSocialLinks(socialLinks)
+  }
   context.res = {
-    body: JSON.stringify(articles)
+    body: JSON.stringify(articles, null, 2)
   }
 }

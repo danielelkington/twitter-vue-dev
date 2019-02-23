@@ -6,16 +6,27 @@ exports.index = async (context, req) => {
     // Thanks to Sarthak Sharma, particularly https://github.com/sarthology/devtocli/blob/master/src/util/crawler.js
     // for assistance with web scraping!
     const xray = Xray();
-    const objects = await xray('https://dev.to/t/vue/latest', '#substories .single-article', [{
+    const articleScrapeData = await xray(`https://dev.to/t/${process.env.dev_tag}/latest`, '#substories .single-article', [
+        {
             title: '.index-article-link .content h3',
             author: 'h4 a',
             link: '.index-article-link@href',
-            tags: ['.tags .tag'] // need the tags so we can strip them out of the title
-        }]);
-    const articles = objects.filter((x) => x.title && x.author && x.link).map((x) => new Article_1.Article(x.title, x.author, x.link, x.tags));
-    // TODO get Twitter profile (parse URL to get username)
+            tags: ['.tags .tag'],
+            authorLink: '.small-pic-link-wrapper@href'
+        }
+    ]);
+    const articles = articleScrapeData
+        .filter((x) => x.title && x.author && x.link)
+        .map((x) => new Article_1.Article(x.title, x.author, x.link, x.tags, x.authorLink));
+    // Scrape author Twitter handles
+    for (let article of articles) {
+        const socialLinks = await xray(article.authorLink, [
+            '.profile-details .social a@href'
+        ]);
+        article.setTwitterHandleFromSocialLinks(socialLinks);
+    }
     context.res = {
-        body: JSON.stringify(articles)
+        body: JSON.stringify(articles, null, 2)
     };
 };
 //# sourceMappingURL=index.js.map

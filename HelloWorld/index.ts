@@ -6,8 +6,6 @@ import { Context } from 'azure-functions-ts-essentials'
 export const index = async (context: Context, req: any) => {
   // Thanks to Sarthak Sharma, particularly https://github.com/sarthology/devtocli/blob/master/src/util/crawler.js
   // for assistance with web scraping!
-  const tweet = new Tweet(context)
-  await tweet.sendTweet('Test4')
   const xray = Xray()
   const articleScrapeData = await xray(
     `https://dev.to/t/${process.env.dev_tag}/latest`,
@@ -27,12 +25,16 @@ export const index = async (context: Context, req: any) => {
     .map(
       (x: any) => new Article(x.title, x.author, x.link, x.tags, x.authorLink)
     )
+  const tweet = new Tweet(context)
   // Scrape author Twitter handles
   for (let article of articles) {
     const socialLinks: string[] = await xray(article.authorLink, [
       '.profile-details .social a@href'
     ])
     article.setTwitterHandleFromSocialLinks(socialLinks)
+
+    // Tweet articles if they're not yet tweeted!
+    await tweet.tweetArticleIfNotYetTweeted(article)
   }
   context.res = {
     body: JSON.stringify(articles, null, 2),

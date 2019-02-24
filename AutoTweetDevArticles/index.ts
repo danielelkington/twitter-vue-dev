@@ -36,8 +36,4 @@ export const index = async (context: Context, req: any) => {
     // Tweet articles if they're not yet tweeted!
     await tweet.tweetArticleIfNotYetTweeted(article)
   }
-  context.res = {
-    body: JSON.stringify(articles, null, 2),
-    status: 200
-  }
 }

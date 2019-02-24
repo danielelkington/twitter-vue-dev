@@ -1,11 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Xray = require('x-ray');
+const x_ray_1 = __importDefault(require("x-ray"));
 const Article_1 = require("./Article");
+const tweet_1 = require("./tweet");
 exports.index = async (context, req) => {
     // Thanks to Sarthak Sharma, particularly https://github.com/sarthology/devtocli/blob/master/src/util/crawler.js
     // for assistance with web scraping!
-    const xray = Xray();
+    const tweet = new tweet_1.Tweet(context);
+    await tweet.sendTweet('Test4');
+    const xray = x_ray_1.default();
     const articleScrapeData = await xray(`https://dev.to/t/${process.env.dev_tag}/latest`, '#substories .single-article', [
         {
             title: '.index-article-link .content h3',
@@ -26,7 +32,8 @@ exports.index = async (context, req) => {
         article.setTwitterHandleFromSocialLinks(socialLinks);
     }
     context.res = {
-        body: JSON.stringify(articles, null, 2)
+        body: JSON.stringify(articles, null, 2),
+        status: 200
     };
 };
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,6 @@
 # twitter-vue-dev
 
-![Logo](images/logo.png?raw=true 'Logo')
+![Logo](images/logo.png?raw=true 'Logo' | width=100)
 
 A bot that lives in Azure Functions and tweets all [dev.to](https://dev.to) VueJS articles. Find it [@TheVueDev](https://twitter.com/TheVueDev).
 
@@ -18,8 +18,11 @@ Follow these instructions to create your own Twitter bot that tweets [dev.to](ht
    - Fill in the requested information about what your developer account will be used for, accept the terms and conditions, and answer any other questions.
 1. Once you have completed the process to create a developer account, click "Create an app".
 1. Give it a name and description. The URL is irrelevant - you can enter https://example.com. - No need to "Enable Sign in with Twitter" or enter Callback URLs, other URLs, or Organization details. - You will however need to enter some details about how the app will be used.
+
    ![Creating a Twitter app](images/TwitterAppForm.png?raw=true 'TwitterAppForm')
+
 1. After creating the app, click "Keys and tokens", and under "Access token & access token secret" click "Create" to generate an access token that will enable you to tweet to the account using Twitter's APIs. Keep this page open in a tab - you'll need all for keys and secrets later!
+
    ![Twitter Keys and Tokens](images/TwitterKeysAndTokens.png?raw=true 'TwitterKeysAndTokens')
 
 ### Setup Azure Function
@@ -28,10 +31,11 @@ Follow these instructions to create your own Twitter bot that tweets [dev.to](ht
 1. In the Azure Portal, click "Create a resource", and create a new "Function App".
    ![Creating a Function App](images/CreatingAFunctionApp.png?raw=true 'CreatingAFunctionApp')
 1. Fill in the details of your Function App. - Make sure you set the `Runtime Stack` option to **JavaScript** - this isn't easy to change later.
+
    - You'll need to create a Storage account where Azure will store some files relating to the function. This may cost you a few cents each month.
    - If you wish you can set up an Application Insights application to monitor the function.
 
-![Function App Options](images/FunctionAppOptions.png?raw=true 'FunctionAppOptions')
+   ![Function App Options](images/FunctionAppOptions.png?raw=true 'FunctionAppOptions')
 
 1. Wait for the function app to deploy, then navigate to it in the Azure Portal and click `Application Settings`.
    ![Select Application Settings](images/SelectApplicationSettings.png?raw=true 'SelectApplicationSettings')
@@ -51,7 +55,11 @@ Follow these instructions to create your own Twitter bot that tweets [dev.to](ht
 1. Clone or download this repository and run `npm install` from the root directory to install node modules.
 1. Run `tsc` from the root directory to compile Typescript.
 1. Open the project in Visual Studio Code, and click on the new Azure icon in the left. Click "Sign in to Azure" and follow the prompts to sign in.
+
    ![Azure Function Extension](images/AzureFunctionsExtension.png?raw=true 'AzureFunctionsExtension')
+
 1. Click the correct button in the Visual Studio Code extension to deploy the Function app, and follow the prompts to select the function app you created earlier.
+
    ![Deploy Function App](images/DeployFunctionApp.png?raw=true 'DeployFunctionApp')
+
 1. Check the Twitter Account and see if it's Tweeting!

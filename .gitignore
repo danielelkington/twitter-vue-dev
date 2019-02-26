@@ -9,6 +9,8 @@ Publish
 *.suo
 *.cscfg
 *.Cache
+*.js
+*.js.map
 project.lock.json
 
 /packages

@@ -1,6 +1,6 @@
 # twitter-vue-dev
 
-![Logo](images/logo.png?raw=true 'Logo' | width=100)
+<img src="images/logo.png" width="400" alt="Logo">
 
 A bot that lives in Azure Functions and tweets all [dev.to](https://dev.to) VueJS articles. Find it [@TheVueDev](https://twitter.com/TheVueDev).
 
@@ -19,26 +19,25 @@ Follow these instructions to create your own Twitter bot that tweets [dev.to](ht
 1. Once you have completed the process to create a developer account, click "Create an app".
 1. Give it a name and description. The URL is irrelevant - you can enter https://example.com. - No need to "Enable Sign in with Twitter" or enter Callback URLs, other URLs, or Organization details. - You will however need to enter some details about how the app will be used.
 
-   ![Creating a Twitter app](images/TwitterAppForm.png?raw=true 'TwitterAppForm')
+   <img src="images/TwitterAppForm.png" width="400" alt="Creating a Twitter app">
 
 1. After creating the app, click "Keys and tokens", and under "Access token & access token secret" click "Create" to generate an access token that will enable you to tweet to the account using Twitter's APIs. Keep this page open in a tab - you'll need all for keys and secrets later!
 
-   ![Twitter Keys and Tokens](images/TwitterKeysAndTokens.png?raw=true 'TwitterKeysAndTokens')
+   <img src="images/TwitterKeysAndTokens.png" width="400" alt="Twitter Keys and Tokens">
 
 ### Setup Azure Function
 
 1. Go to [portal.azure.com](https://portal.azure.com) and sign in/sign up. You will need a subscription, so create one if you haven't yet got one.
 1. In the Azure Portal, click "Create a resource", and create a new "Function App".
-   ![Creating a Function App](images/CreatingAFunctionApp.png?raw=true 'CreatingAFunctionApp')
+   <img src="images/CreatingAFunctionApp.png" width="700" alt="Creating a Function App">
 1. Fill in the details of your Function App. - Make sure you set the `Runtime Stack` option to **JavaScript** - this isn't easy to change later.
 
    - You'll need to create a Storage account where Azure will store some files relating to the function. This may cost you a few cents each month.
    - If you wish you can set up an Application Insights application to monitor the function.
-
-   ![Function App Options](images/FunctionAppOptions.png?raw=true 'FunctionAppOptions')
+   <img src="images/FunctionAppOptions.png" width="400" alt="Function App Options">
 
 1. Wait for the function app to deploy, then navigate to it in the Azure Portal and click `Application Settings`.
-   ![Select Application Settings](images/SelectApplicationSettings.png?raw=true 'SelectApplicationSettings')
+   <img src="images/SelectApplicationSettings.png" width="300" alt="Select Application Settings">
 1. Under "Application Settings", add the following new settings to set environment variables that the function code can use:
    - `dev_tag`: The exact valid dev.to tag that you want the bot to tweet articles for. Leave out the #.
    - `twitter_bot_screen_name`: The Twitter handle of your bot. Leave out the @.
@@ -46,7 +45,7 @@ Follow these instructions to create your own Twitter bot that tweets [dev.to](ht
    - `twitter_consumer_secret`: The API Secret Key from the Twitter app.
    - `twitter_access_token`: The Access Token from the Twitter app.
    - `twitter_access_token_secret`: The Access Token Secret from the Twitter app.
-     ![Configure Application Settings](images/ConfigureApplicationSettings.png?raw=true 'ConfigureApplicationSettings')
+      <img src="images/ConfigureApplicationSettings.png" width="500" alt="Configure Application Settings">
 
 ### Get code and deploy!
 
@@ -56,10 +55,10 @@ Follow these instructions to create your own Twitter bot that tweets [dev.to](ht
 1. Run `tsc` from the root directory to compile Typescript.
 1. Open the project in Visual Studio Code, and click on the new Azure icon in the left. Click "Sign in to Azure" and follow the prompts to sign in.
 
-   ![Azure Function Extension](images/AzureFunctionsExtension.png?raw=true 'AzureFunctionsExtension')
+   <img src="images/AzureFunctionsExtension.png" width="300" alt="Azure Function Extension">
 
 1. Click the correct button in the Visual Studio Code extension to deploy the Function app, and follow the prompts to select the function app you created earlier.
 
-   ![Deploy Function App](images/DeployFunctionApp.png?raw=true 'DeployFunctionApp')
+   <img src="images/DeployFunctionApp.png" width="400" alt="Deploy Function App">
 
 1. Check the Twitter Account and see if it's Tweeting!

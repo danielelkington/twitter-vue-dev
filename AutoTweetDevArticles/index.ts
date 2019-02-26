@@ -25,6 +25,8 @@ export const index = async (context: Context, req: any) => {
     .map(
       (x: any) => new Article(x.title, x.author, x.link, x.tags, x.authorLink)
     )
+    .reverse() // will ensure articles get tweeted in the correct order.
+
   const tweet = new Tweet(context)
   // Scrape author Twitter handles
   for (let article of articles) {

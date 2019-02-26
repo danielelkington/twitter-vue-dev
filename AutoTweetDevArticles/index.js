@@ -21,7 +21,8 @@ exports.index = async (context, req) => {
     ]);
     const articles = articleScrapeData
         .filter((x) => x.title && x.author && x.link)
-        .map((x) => new Article_1.Article(x.title, x.author, x.link, x.tags, x.authorLink));
+        .map((x) => new Article_1.Article(x.title, x.author, x.link, x.tags, x.authorLink))
+        .reverse(); // will ensure articles get tweeted in the correct order.
     const tweet = new tweet_1.Tweet(context);
     // Scrape author Twitter handles
     for (let article of articles) {

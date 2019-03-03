@@ -4,6 +4,8 @@
 
 A bot that lives in Azure Functions and tweets all [dev.to](https://dev.to) VueJS articles. Find it [@TheVueDev](https://twitter.com/TheVueDev).
 
+[dev.to article explaining how this was created.](https://dev.to/danielelkington/a-bot-that-tweets-new-dev-articles-about-vue-4p5a)
+
 This same code can be used to create a Twitter bot that tweets new articles from any valid [dev.to](https://dev.to) tag.
 
 ## Deployment

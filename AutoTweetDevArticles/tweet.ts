@@ -34,7 +34,8 @@ ${article.link}`
     if (this.recentTweets == null) {
       // Get recent tweets
       const res = await this.t.get('statuses/user_timeline', {
-        screen_name: process.env.twitter_bot_screen_name
+        screen_name: process.env.twitter_bot_screen_name,
+        tweet_mode: 'extended'
       })
       this.recentTweets = <any[]>res.data
     }
